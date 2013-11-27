@@ -14,7 +14,7 @@ class MemeOCR:
         try:
             img = cv2.imread(fname)
         except IOError:
-            return None
+            return False
         for i in range(img.shape[0]):
             for j in range(img.shape[1]):
                 if all([elem >= self._white_thresh for elem in img[i][j]]):
@@ -23,10 +23,12 @@ class MemeOCR:
                     img[i][j] = (0, 0, 0)
 
         cv2.imwrite(self._tmp_image_fname, img)
+        return True
 
     def _exec_tesseract(self):
         cmd = 'env TESSDATA_PREFIX=./ tesseract -l joh %s %s > /dev/null' % (self._tmp_image_fname, self._tmp_txt_base)
-        os.system(cmd)
+        ret = os.system(cmd)
+        return ret == 0
 
     def _read_txt(self):
         try:
@@ -34,12 +36,25 @@ class MemeOCR:
         except IOError:
             return None
         content = fr.read()
+        fr.close()
         blocks = re.split(r'\n\n', content)
         lines = [re.sub(r'\s+', ' ', block) for block in blocks if block.strip()]
         return lines
 
+    def _delete_tmp_files(self):
+        if os.path.exists(self._tmp_image_fname):
+            os.remove(self._tmp_image_fname)
+        if os.path.exists(self._tmp_txt_fname):
+            os.remove(self._tmp_txt_fname)
+
     def recognize(self, fname):
-        self._thresh_words(fname)
-        self._exec_tesseract()
-        return self._read_txt()
+        if not self._thresh_words(fname):
+            self._delete_tmp_files()
+            return None
+        if not self._exec_tesseract():
+            self._delete_tmp_files()
+            return None
+        txt = self._read_txt()
+        self._delete_tmp_files()
+        return txt
 
