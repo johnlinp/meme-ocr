@@ -1,5 +1,6 @@
 import sys
 import os
+import re
 import cv2
 
 class MemeOCR:
@@ -32,7 +33,10 @@ class MemeOCR:
             fr = open(self._tmp_txt_fname)
         except IOError:
             return None
-        return fr.read()
+        content = fr.read()
+        blocks = re.split(r'\n\n', content)
+        lines = [re.sub(r'\s+', ' ', block) for block in blocks if block.strip()]
+        return lines
 
     def recognize(self, fname):
         self._thresh_words(fname)
