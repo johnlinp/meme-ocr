@@ -1,10 +1,12 @@
+#!/usr/bin/env python2
+
 import sys
 from memeocr import MemeOCR
 
 def main(argv):
     if len(argv) != 2:
         print 'usage:'
-        print '    python main.py meme-file-name'
+        print '    ./main.py meme-file-name'
         return
 
     meme_fname = argv[1]
