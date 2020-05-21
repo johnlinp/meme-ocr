@@ -6,8 +6,8 @@ import cv2
 class MemeOCR:
     def __init__(self):
         self._white_thresh = 240
-        self._tmp_image_fname = '/tmp/memeocr.jpg'
-        self._tmp_txt_base = '/tmp/memeocr'
+        self._tmp_image_fname = './memeocr.jpg'
+        self._tmp_txt_base = './memeocr'
         self._tmp_txt_fname = self._tmp_txt_base + '.txt'
         self._template_image = None
         self._keep_tmp_files = False
@@ -45,7 +45,7 @@ class MemeOCR:
         cv2.imwrite(self._tmp_image_fname, img)
 
     def _exec_tesseract(self):
-        cmd = 'env TESSDATA_PREFIX=./tessdata tesseract -l joh %s %s > /dev/null' % (self._tmp_image_fname, self._tmp_txt_base)
+        cmd = 'env TESSDATA_PREFIX=./tessdata tesseract -l joh %s %s' % (self._tmp_image_fname, self._tmp_txt_base)
         os.system(cmd)
 
     def _read_txt(self):
