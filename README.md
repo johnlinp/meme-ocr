@@ -27,4 +27,11 @@ $ ./main.py /path/to/your/some-crazy-meme.jpg
 And the recognized texts will be printed in the stdout.
 
 
+## Examples
+
+```
+$ ./main.py ./examples/socially-awkward-penguin.jpg
+```
+
+
 [1]: https://code.google.com/p/tesseract-ocr/
