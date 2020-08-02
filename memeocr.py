@@ -38,9 +38,9 @@ class MemeOCR:
         for i in range(img.shape[0]):
             for j in range(img.shape[1]):
                 if all([elem >= self._white_thresh for elem in img[i][j]]):
-                    img[i][j] = (255, 255, 255)
-                else:
                     img[i][j] = (0, 0, 0)
+                else:
+                    img[i][j] = (255, 255, 255)
 
         cv2.imwrite(self._tmp_image_fname, img)
 
