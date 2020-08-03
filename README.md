@@ -7,7 +7,7 @@ A dedicated trained Tesseract model is included.
 
 ## Requirement
 
-- Install the `tesseract` executable by [this tutorial](https://github.com/tesseract-ocr/tesseract/wiki).
+- Install the `tesseract` executable by [this tutorial][2]
 - Install Python OpenCV package by:
 
 ```
@@ -34,4 +34,5 @@ $ ./main.py ./examples/socially-awkward-penguin.jpg
 ```
 
 
-[1]: https://code.google.com/p/tesseract-ocr/
+[1]: https://github.com/tesseract-ocr/tesseract
+[2]: https://tesseract-ocr.github.io/tessdoc/Home.html
