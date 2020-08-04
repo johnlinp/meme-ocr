@@ -2,8 +2,6 @@
 
 This is an optical character recognition (OCR) tool using [Tesseract][1] specifically for internet meme images.
 
-A dedicated trained Tesseract model is included.
-
 
 ## Requirement
 

@@ -45,7 +45,7 @@ class MemeOCR:
         cv2.imwrite(self._tmp_image_fname, img)
 
     def _exec_tesseract(self):
-        cmd = 'env TESSDATA_PREFIX=./tessdata tesseract -l joh %s %s' % (self._tmp_image_fname, self._tmp_txt_base)
+        cmd = 'tesseract -l eng %s %s' % (self._tmp_image_fname, self._tmp_txt_base)
         os.system(cmd)
 
     def _read_txt(self):
