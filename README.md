@@ -9,7 +9,7 @@ This is an optical character recognition (OCR) tool using [Tesseract][1] specifi
 - Install Python OpenCV package by:
 
 ```
-$ sudo pip install opencv-python
+$ sudo pip3 install opencv-python
 ```
 
 
