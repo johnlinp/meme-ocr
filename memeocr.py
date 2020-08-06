@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 import re
 import cv2
 
@@ -45,8 +46,13 @@ class MemeOCR:
         cv2.imwrite(self._tmp_image_fname, img)
 
     def _exec_tesseract(self):
-        cmd = 'tesseract -l eng %s %s' % (self._tmp_image_fname, self._tmp_txt_base)
-        os.system(cmd)
+        subprocess.run([
+            'tesseract',
+            '-l',
+            'eng',
+            self._tmp_image_fname,
+            self._tmp_txt_base,
+        ])
 
     def _read_txt(self):
         try:
